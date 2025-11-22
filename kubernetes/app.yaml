@@ -6,18 +6,6 @@ metadata:
   name: apps
 
 ---
-# Backend ConfigMap
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: app-config
-  namespace: apps
-data:
-  AWS_REGION: "ap-south-1"
-  DDB_TABLE_NAME: "kafka_messages"
-  BACKEND_URL: "http://backend:8000"
-
----
 # Backend Deployment
 apiVersion: apps/v1
 kind: Deployment
@@ -46,16 +34,31 @@ spec:
         ports:
         - containerPort: 8000
         env:
+        - name: KAFKA_BOOTSTRAP_SERVERS
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: KAFKA_BOOTSTRAP_SERVERS
+        - name: KAFKA_API_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: KAFKA_API_KEY
+        - name: KAFKA_API_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: KAFKA_API_SECRET
+        - name: DYNAMODB_TABLE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DYNAMODB_TABLE_NAME
         - name: AWS_REGION
           valueFrom:
             configMapKeyRef:
-              name: app-config
+              name: backend-config
               key: AWS_REGION
-        - name: DDB_TABLE_NAME
-          valueFrom:
-            configMapKeyRef:
-              name: app-config
-              key: DDB_TABLE_NAME
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
