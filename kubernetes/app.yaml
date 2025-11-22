@@ -34,21 +34,6 @@ spec:
         ports:
         - containerPort: 8000
         env:
-        - name: KAFKA_BOOTSTRAP_SERVERS
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: KAFKA_BOOTSTRAP_SERVERS
-        - name: KAFKA_API_KEY
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: KAFKA_API_KEY
-        - name: KAFKA_API_SECRET
-          valueFrom:
-            configMapKeyRef:
-              name: backend-config
-              key: KAFKA_API_SECRET
         - name: DDB_TABLE_NAME
           valueFrom:
             configMapKeyRef:
