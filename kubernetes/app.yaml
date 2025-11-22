@@ -49,11 +49,11 @@ spec:
             configMapKeyRef:
               name: backend-config
               key: KAFKA_API_SECRET
-        - name: DYNAMODB_TABLE_NAME
+        - name: DDB_TABLE_NAME
           valueFrom:
             configMapKeyRef:
               name: backend-config
-              key: DYNAMODB_TABLE_NAME
+              key: DDB_TABLE_NAME
         - name: AWS_REGION
           valueFrom:
             configMapKeyRef:
