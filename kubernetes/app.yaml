@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: gcr.io/PROJECT_ID/backend:latest
+        image: gcr.io/${GCP_PROJECT_ID}/backend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -136,7 +136,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: gcr.io/PROJECT_ID/frontend:latest
+        image: gcr.io/${GCP_PROJECT_ID}/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
